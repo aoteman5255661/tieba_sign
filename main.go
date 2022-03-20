@@ -27,7 +27,7 @@ func getBDUSS() []string {
 	//	fmt.Println("bduss获取失败")
 	//	return nil
 	//}
-	fmt.Printf(">>>>>>> %v\n", bdussArr)
+	//fmt.Printf(">>>>>>> %v\n", bdussArr)
 	return bdussArr
 }
 
@@ -42,7 +42,7 @@ func main() {
 		if err != nil {
 			return
 		}
-		fmt.Println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+		//fmt.Println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 		doSign(bduss)
 	}
 
@@ -67,15 +67,15 @@ func wireTbs(bduss string) error {
 注入关注的贴吧
 */
 func wireFollow(bduss string) error {
-	fmt.Printf(">>>>  %v\n", bduss)
+	//fmt.Printf(">>>>  %v\n", bduss)
 	if content, err := util.DoGet(like_url, util.ReqParam{Bduss: bduss}); err == nil {
 		info("获取关注列表成功")
-		fmt.Println(content)
+		//fmt.Println(content)
 		data := content["data"].(map[string]interface{})
-		fmt.Println("=========================================================")
-		fmt.Println(data)
+		//fmt.Println("=========================================================")
+		//fmt.Println(data)
 		dataList := data["like_forum"].([]interface{})
-		fmt.Println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+		//fmt.Println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 		followNum = len(dataList)
 		for _, _data := range dataList {
 			v := _data.(map[string]interface{})

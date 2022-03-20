@@ -3,7 +3,6 @@ package util
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -22,7 +21,7 @@ func DoGet(url string, param ReqParam) (map[string]interface{}, error) {
 		return nil, err
 	}
 	initHeader(&req.Header, param.Bduss)
-	fmt.Printf("Bduss >>>   %v\n", param.Bduss)
+	//fmt.Printf("Bduss >>>   %v\n", param.Bduss)
 	if resp, err := client.Do(req); err == nil {
 		defer func(Body io.ReadCloser) {
 			Body.Close()
@@ -30,7 +29,7 @@ func DoGet(url string, param ReqParam) (map[string]interface{}, error) {
 		var content map[string]interface{}
 		if v, err := ioutil.ReadAll(resp.Body); err == nil {
 			if err = json.Unmarshal(v, &content); err == nil {
-				fmt.Println(content)
+				//fmt.Println(content)
 				return content, nil
 			}
 		}
