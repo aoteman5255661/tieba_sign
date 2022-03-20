@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"strings"
-	"tieba-sign/src/db"
 	util "tieba-sign/src/util"
 	"time"
 )
@@ -21,11 +20,14 @@ var tbs string
 var followNum = 200
 
 func getBDUSS() []string {
-	bdussArr, err := db.GetBDUSS()
-	if err != nil {
-		fmt.Println("bduss获取失败")
-		return nil
-	}
+	//bdussArr, err := db.GetBDUSS()
+	bdussArr := []string{"DFhdlN6b1FQWWpMcVJjN2k5dUNJMlNTTGhGcDFSaGxGdjZnU2h1T1BKS21KMTVpRVFBQUFBJCQAAAAAAAAAAAEAAAA1LuUEYW90ZW1hbjUyNTU2NjEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKaaNmKmmjZiZ"}
+	//bdussArr = append(bdussArr, "DFhdlN6b1FQWWpMcVJjN2k5dUNJMlNTTGhGcDFSaGxGdjZnU2h1T1BKS21KMTVpRVFBQUFBJCQAAAAAAAAAAAEAAAA1LuUEYW90ZW1hbjUyNTU2NjEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKaaNmKmmjZiZ")
+	//if err != nil {
+	//	fmt.Println("bduss获取失败")
+	//	return nil
+	//}
+	fmt.Printf(">>>>>>> %v\n", bdussArr)
 	return bdussArr
 }
 
@@ -40,6 +42,7 @@ func main() {
 		if err != nil {
 			return
 		}
+		fmt.Println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 		doSign(bduss)
 	}
 
@@ -64,10 +67,15 @@ func wireTbs(bduss string) error {
 注入关注的贴吧
 */
 func wireFollow(bduss string) error {
+	fmt.Printf(">>>>  %v\n", bduss)
 	if content, err := util.DoGet(like_url, util.ReqParam{Bduss: bduss}); err == nil {
 		info("获取关注列表成功")
+		fmt.Println(content)
 		data := content["data"].(map[string]interface{})
+		fmt.Println("=========================================================")
+		fmt.Println(data)
 		dataList := data["like_forum"].([]interface{})
+		fmt.Println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 		followNum = len(dataList)
 		for _, _data := range dataList {
 			v := _data.(map[string]interface{})
