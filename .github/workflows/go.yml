@@ -23,3 +23,4 @@ jobs:
 
     - name: Go run
       run: go run main.go
+
